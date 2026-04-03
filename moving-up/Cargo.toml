@@ -1,0 +1,17 @@
+[package]
+name = "moving-up"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+chrono = "0.4.44"
+console_error_panic_hook = "0.1.7"
+enum_dispatch = "0.3.13"
+enum_macros = "0.0.4"
+json = "0.12.4"
+regex = "1.12.3"
+select = "0.6.1"
+wasm-bindgen = "0.2.113"

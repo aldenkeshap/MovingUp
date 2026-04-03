@@ -1,0 +1,49 @@
+h1 {
+    font-size: 6vh;
+    padding: 0;
+}
+select {
+    font-size: 3vh;
+    margin-right: 3vw;
+}
+.teams {
+    display: grid;
+
+    font-size: 3vh;
+    /*padding: 0;
+    margin: 0;*/
+    position: relative;
+}
+.three {
+    grid-template-columns: 25vw 50vw 1fr;
+}
+.four {
+    grid-template-columns: 15vw 15vw 50vw 1fr;
+}
+.game {
+    padding-top: 0;
+    padding-left: 5vw;
+    /*offse;*/
+    grid-column: 1 / -1;
+}
+/*.game3 {
+
+}*/
+p {
+    padding: 0;
+    margin: 0;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+.top {
+    position: sticky;
+    top: 0;
+    margin-top: 0.5vh;
+    padding-bottom: 1.5vh;
+    padding-top: 1vh;
+    background-color: #ffffff;
+}
+
+#table {
+    display: none;
+}

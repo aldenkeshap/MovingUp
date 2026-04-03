@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png" href="favicon.png" />
+
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link
+            rel="stylesheet"
+            href="mobile.css"
+            media="screen and (max-aspect-ratio: 1/1)"
+        />
+        <link
+            rel="stylesheet"
+            href="desktop.css"
+            media="screen and (min-aspect-ratio: 1/1)"
+        />
+
+        <title>Moving Up</title>
+    </head>
+    <body>
+        <div>
+            <h1 style="">Moving Up</h1>
+            <select id="sport">
+                <option value="men-bball">Men's basketball</option>
+                <option value="women-bball">Women's basketball</option>
+                <option value="men-lax">Men's lacrosse</option>
+                <option value="women-lax">Women's lacrosse</option>
+                <option value="baseball">Baseball</option>
+                <option value="softball">Softball</option>
+            </select>
+
+            <select id="ranking"></select>
+        </div>
+        <table style="width: 100%" id="table">
+            <tr>
+                <th>Team</th>
+                <th>Ranking</th>
+                <th id="points-header-desktop">Points</th>
+                <th>Record</th>
+                <th style="width: 100%">Games</th>
+            </tr>
+        </table>
+        <div id="teams" class="teams four">
+            <strong class="top">Rank</strong>
+            <strong class="top" id="points-header-mobile">Votes</strong>
+            <strong class="top">Team</strong>
+            <strong class="top">Record</strong>
+
+            <!--<p>1</p>
+            <p>Virginia</p>
+            <p>10-2</p>
+
+            <p class="game win">vs 12 Mississippi St W 6-3</p>
+            <p class="game loss">vs Duke W 20-19</p>
+            <p class="game current">vs Duke W 20-19</p>
+            <p
+                class="game future"
+                onclick="this.innerText += ' on Peacock/NBCSN'"
+            >
+                at Michigan State 5-0, Top 3rd
+            </p>-->
+        </div>
+        <script type="module" src="script.js"></script>
+    </body>
+</html>

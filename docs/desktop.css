@@ -1,0 +1,32 @@
+#sport {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    /*float: right;*/
+}
+
+td {
+    width: 0.1%;
+    white-space: nowrap;
+    padding-right: 1em;
+}
+
+th {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+table,
+th,
+td {
+    border: 0.1em solid black;
+    border-collapse: collapse;
+}
+
+.game {
+    margin-right: 1em;
+    /*    border: 0.1em solid black;*/
+}
+
+#teams {
+    display: none;
+}
