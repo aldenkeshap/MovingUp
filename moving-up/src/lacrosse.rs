@@ -7,37 +7,23 @@ use crate::{
     team::{Team, Teams},
 };
 
-pub fn usila_weeks(html: &str) -> String {
-    let doc = Document::from(html);
-
-    let section = doc
-        .find(predicate::Attr("id", "navigation"))
-        .next()
-        .unwrap();
-    let script = section
-        .find(predicate::Name("script"))
-        .next()
-        .unwrap()
-        .text();
-    let json = Regex::new(r"var component = (.+);\n")
-        .unwrap()
-        .captures(&script)
-        .unwrap()
-        .get(1)
-        .unwrap()
-        .as_str();
-
+pub fn usila_weeks(json: &str) -> String {
     let mut j = json::parse(json).unwrap();
 
-    j["data"]
-        .members_mut()
-        .find(|section| section["title"].as_str() == Some("Polls"))
-        .unwrap()["items"]
-        .members_mut()
-        .find(|poll| poll["title"].as_str() == Some("Division I"))
-        .unwrap()["url"]
-        .take_string()
-        .unwrap()
+    format!(
+        "https://usila.org{}",
+        j["data"]
+            .members_mut()
+            .find(|story| {
+                story["story_filename"]
+                    .as_str()
+                    .unwrap()
+                    .contains("division-i-")
+            })
+            .unwrap()["story_path"]
+            .take_string()
+            .unwrap()
+    )
 }
 
 pub fn usila_specifc(team_ids: &Teams, html: &str) -> Ranking {

@@ -349,7 +349,9 @@ impl Options for MensLacrosse {
             MensLacrosse::InsideLacrosse => {
                 "https://site.api.espn.com/apis/site/v2/sports/lacrosse/mens-college-lacrosse/rankings"
             }
-            MensLacrosse::USILA => "https://usila.org/archives.aspx?path=mlax",
+            MensLacrosse::USILA => {
+                "https://usila.org/services/archives.ashx/stories?index=1&page_size=30&sport=mlax&season=0&school=0&search=poll"
+            }
             MensLacrosse::USALacrosse => {
                 "https://www.usalacrosse.com/magazine/usa-lacrosse-division-i-mens-top-20"
             }
