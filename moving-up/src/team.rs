@@ -88,8 +88,9 @@ impl Teams {
             "U Mass Amherst" => "Massachusetts",
             "Southern California" => "USC",
             "Albany" => "UAlbany",
+            "Miami (FL)" => "Miami",
             // "USF" => "South Florida",
-            "Long Island University" | "Long Island" => return Some("2341"),
+            "Long Island University" | "Long Island" | "LIU" => return Some("2341"),
             n => n,
         };
         self.0.get(name).map(|n| n.as_str())
