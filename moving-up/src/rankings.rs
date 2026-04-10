@@ -483,7 +483,7 @@ impl Options for Baseball {
             Opts::BaseballAmerica => {
                 "https://www.baseballamerica.com/stories/college-baseball-top-25-rankings/"
             }
-            Opts::Athletic => "https://www.nytimes.com/athletic/tag/college-baseball/",
+            Opts::Athletic => "https://www.nytimes.com/athletic/tag/college-sports/",
             Opts::PerfectGame => "https://www.perfectgame.org/Articles/Archive.aspx?Category=2",
         }
     }
