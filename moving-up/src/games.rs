@@ -88,7 +88,7 @@ impl Game {
         }
         .to_string()
     }
-    fn format_broadcasts(&self) -> String {
+    pub fn format_broadcasts(&self) -> String {
         if self.broadcasts.is_empty() {
             "".into()
         } else {

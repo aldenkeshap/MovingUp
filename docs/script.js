@@ -230,6 +230,15 @@ async function run_sport(sportName, rankingName) {
           span.title = p.game.tooltip();
           games.appendChild(span);
         } else {
+          span.onclick = function () {
+            if (
+              span.classList.contains("future") &&
+              !span.classList.contains("added-broadcast")
+            ) {
+              span.innerText += p.game.format_broadcasts();
+              span.classList.add("added-broadcast");
+            }
+          };
           games.before(span);
         }
       }
@@ -251,8 +260,15 @@ async function run_sport(sportName, rankingName) {
       for (const teamId of p.perspectives) {
         // console.log("P")
         let span = document.getElementById(`game-${teamId}-${p.game.id}`);
-        console.log(`game-${teamId}-${p.game.id}`);
-        span.innerText = p.game.show(teamId);
+        // console.log(`game-${teamId}-${p.game.id}`);
+        let text = p.game.show(teamId);
+        if (span.classList.contains("added-broadcast")) {
+          text += p.game.format_broadcasts();
+        }
+        if (span.innerText !== text) {
+          console.log("CHANGE", span.innerText, "|", text);
+          span.innerText = text;
+        }
 
         const cls = p.game.class(teamId);
         if (!span.classList.contains(cls)) {
