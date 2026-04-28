@@ -18,9 +18,9 @@ function p(text, id) {
 
 async function load(url) {
   if (url.includes("espn.com")) {
-    return await load_normal(url);
+    return await load_proxy(url, "https://api.codetabs.com/v1/proxy?quest=");
   } else {
-    return await load_proxy(url);
+    return await load_proxy(url, "https://corsproxy.io/?url=");
   }
 }
 
@@ -28,7 +28,7 @@ async function load_normal(url) {
   return await (await fetch(url)).text();
 }
 
-async function load_proxy(url) {
+async function load_proxy(url, proxy) {
   for (let i = 0; i < 5; i++) {
     try {
       // let j = await (
@@ -37,9 +37,7 @@ async function load_proxy(url) {
       //   )
       // ).json();
       // return j.contents;
-      return await (
-        await fetch(`https://corsproxy.io/?url=${encodeURIComponent(url)}`)
-      ).text();
+      return await (await fetch(`${proxy}${encodeURIComponent(url)}`)).text();
     } catch (error) {
       console.log("LP ERR", error);
       await new Promise((r) => setTimeout(r, 1000));
