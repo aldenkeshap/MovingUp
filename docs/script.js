@@ -18,9 +18,11 @@ function p(text, id) {
 
 async function load(url) {
   if (url.includes("espn.com")) {
-    return await load_proxy(url, "https://api.codetabs.com/v1/proxy?quest=");
+    return await load_proxy(url, "https://api.codetabs.com/v1/proxy?quest=", 3);
+  } else if (url.includes("nfca.org")) {
+    return await load_proxy(url, "https://corx.venipa.workers.dev/?url=", 1);
   } else {
-    return await load_proxy(url, "https://corsproxy.io/?url=");
+    return await load_proxy(url, "https://corsproxy.io/?url=", 3);
   }
 }
 
@@ -28,8 +30,8 @@ async function load_normal(url) {
   return await (await fetch(url)).text();
 }
 
-async function load_proxy(url, proxy) {
-  for (let i = 0; i < 5; i++) {
+async function load_proxy(url, proxy, limit) {
+  for (let i = 0; i < limit; i++) {
     try {
       // let j = await (
       //   await fetch(
