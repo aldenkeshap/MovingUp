@@ -95,7 +95,10 @@ pub fn usa_softball_specific(team_ids: &Teams, html: &str) -> Ranking {
                 Some((n, f)) => (n.into(), f.strip_suffix(')').unwrap().parse().unwrap()),
             };
             let record = parts.next().unwrap().text();
-            let votes = parts.next().unwrap().text().parse().unwrap();
+            let votes = parts
+                .next()
+                .and_then(|v| v.text().parse().ok())
+                .unwrap_or(0);
 
             Team {
                 id: team_ids
