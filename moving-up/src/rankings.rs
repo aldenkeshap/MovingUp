@@ -5,7 +5,9 @@ use json::parse;
 use wasm_bindgen::prelude::*;
 
 use crate::{
-    baseball, lacrosse, softball,
+    baseball,
+    football::Football,
+    lacrosse, softball,
     sport::{Sport, SportEnum},
     team::{Team, Teams},
 };
@@ -24,12 +26,11 @@ extern "C" {
     fn log(s: &str);
 }
 
-#[wasm_bindgen]
 impl Ranking {
-    fn from_json(json: &str) -> Ranking {
+    pub fn from_json(json: &str) -> Ranking {
         Ranking::from_json_with_poll(json, None)
     }
-    fn from_json_with_poll(json: &str, poll: Option<&str>) -> Ranking {
+    pub fn from_json_with_poll(json: &str, poll: Option<&str>) -> Ranking {
         let mut j = parse(json).expect("parse");
 
         log(&format!("FJWP 1 {}", json.len()));
@@ -76,7 +77,10 @@ impl Ranking {
             start: date.unwrap(),
         }
     }
+}
 
+#[wasm_bindgen]
+impl Ranking {
     pub fn scoreboard_urls(&self, sport: &Sport) -> Vec<String> {
         (0..7)
             .map(|d| self.scoreboard_day(sport, self.start.checked_add_days(Days::new(d)).unwrap()))
@@ -173,13 +177,14 @@ impl RankingType {
 
 #[derive(Clone, Copy)]
 #[enum_dispatch]
-enum RankingOptions {
+pub enum RankingOptions {
     MensBasketball,
     WomensBasketball,
     MensLacrosse,
     WomensLacrosse,
     Baseball,
     Softball,
+    Football,
 }
 
 impl RankingOptions {
@@ -191,6 +196,7 @@ impl RankingOptions {
             RankingOptions::WomensLacrosse(o) => o.custom_discriminant(),
             RankingOptions::Baseball(o) => o.custom_discriminant(),
             RankingOptions::Softball(o) => o.custom_discriminant(),
+            RankingOptions::Football(o) => o.custom_discriminant(),
         }
     }
     fn options(sport: Sport) -> &'static [RankingOptions] {
@@ -201,12 +207,13 @@ impl RankingOptions {
             SportEnum::WomensLacrosse => WomensLacrosse::OPTIONS,
             SportEnum::Baseball => Baseball::OPTIONS,
             SportEnum::Softball => Softball::OPTIONS,
+            SportEnum::Football => Football::OPTIONS,
         }
     }
 }
 
 #[enum_dispatch(RankingOptions)]
-trait Options {
+pub trait Options {
     fn name(&self) -> &str;
 
     fn get_url(&self) -> &str;
@@ -221,7 +228,7 @@ trait Options {
     //     self::<OptionsList>::OPTIONS
     // }
 }
-trait OptionsList {
+pub trait OptionsList {
     const OPTIONS: &[RankingOptions];
 }
 

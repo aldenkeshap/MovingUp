@@ -435,7 +435,7 @@ export class Sport {
 if (Symbol.dispose) Sport.prototype[Symbol.dispose] = Sport.prototype.free;
 
 /**
- * @enum {0 | 1 | 2 | 3 | 4 | 5}
+ * @enum {0 | 1 | 2 | 3 | 4 | 5 | 6}
  */
 export const SportEnum = Object.freeze({
     MensBasketball: 0, "0": "MensBasketball",
@@ -444,6 +444,7 @@ export const SportEnum = Object.freeze({
     WomensLacrosse: 3, "3": "WomensLacrosse",
     Baseball: 4, "4": "Baseball",
     Softball: 5, "5": "Softball",
+    Football: 6, "6": "Football",
 });
 
 export class Team {

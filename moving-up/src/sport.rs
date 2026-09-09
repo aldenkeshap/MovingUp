@@ -9,6 +9,7 @@ pub enum SportEnum {
     WomensLacrosse,
     Baseball,
     Softball,
+    Football,
 }
 #[wasm_bindgen]
 #[derive(Clone, Copy)]
@@ -19,6 +20,7 @@ pub struct Sport {
 impl Sport {
     pub fn slug(&self) -> &str {
         match self.sport {
+            SportEnum::Football => "football/college-football",
             SportEnum::MensBasketball => "basketball/mens-college-basketball",
             SportEnum::WomensBasketball => "basketball/womens-college-basketball",
             SportEnum::MensLacrosse => "lacrosse/mens-college-lacrosse",
@@ -35,17 +37,16 @@ impl Sport {
             (SportEnum::MensBasketball, 3) => "/OT".into(),
             (SportEnum::MensBasketball, p) => format!("/{}OT", p - 2),
             (
-                SportEnum::WomensBasketball | SportEnum::MensLacrosse | SportEnum::WomensLacrosse,
-                4,
-            ) => "".into(),
-            (
-                SportEnum::WomensBasketball | SportEnum::MensLacrosse | SportEnum::WomensLacrosse,
-                5,
-            ) => "/OT".into(),
-            (
-                SportEnum::WomensBasketball | SportEnum::MensLacrosse | SportEnum::WomensLacrosse,
+                SportEnum::WomensBasketball
+                | SportEnum::MensLacrosse
+                | SportEnum::WomensLacrosse
+                | SportEnum::Football,
                 p,
-            ) => format!("/{}OT", p - 4),
+            ) => match p {
+                4 => "".into(),
+                5 => "/OT".into(),
+                p => format!("/{}OT", p - 4),
+            },
         }
     }
 
@@ -76,7 +77,8 @@ impl Sport {
                 "women-lax" => SportEnum::WomensLacrosse,
                 "baseball" => SportEnum::Baseball,
                 "softball" => SportEnum::Softball,
-                _ => SportEnum::MensBasketball,
+                "football" => SportEnum::Football,
+                _ => SportEnum::Football,
             },
         }
     }
