@@ -17,9 +17,8 @@ function p(text, id) {
 }
 
 async function load(url) {
-  if (url.includes("espn.com")) {
-    return await load_proxy(url, "https://api.codetabs.com/v1/proxy?quest=", 3);
-  } else if (url.includes("nfca.org")) {
+  if (url.includes("espn.com") || url.includes("nfca.org")) {
+    // return await load_proxy(url, "https://api.codetabs.com/v1/proxy?quest=", 3);
     return await load_proxy(url, "https://corx.venipa.workers.dev/?url=", 1);
   } else {
     return await load_proxy(url, "https://corsproxy.io/?url=", 3);
@@ -68,7 +67,7 @@ await init();
 init_panics();
 
 const params = new URLSearchParams(window.location.search);
-const sportName = params.get("sport") || "men-bball";
+const sportName = params.get("sport") || "football";
 const rankingName = params.get("ranking") || "espn";
 
 let select = document.getElementById("sport");
