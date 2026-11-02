@@ -1,4 +1,4 @@
-use chrono::{DateTime, Days, Local, NaiveDate};
+use chrono::{DateTime, Days, Local, NaiveDate, TimeDelta};
 use enum_dispatch::enum_dispatch;
 use enum_macros::custom_discriminant;
 use json::parse;
@@ -43,13 +43,18 @@ impl Ranking {
                 continue;
             }
 
-            date = Some(
-                DateTime::parse_from_rfc3339(
-                    &ranking["date"].as_str().unwrap().replace('Z', ":00Z"),
-                )
-                .unwrap()
-                .date_naive(),
-            );
+            let mut d = DateTime::parse_from_rfc3339(
+                &ranking["date"].as_str().unwrap().replace('Z', ":00Z"),
+            )
+            .unwrap()
+            .date_naive();
+            if ranking["occurrence"]["displayValue"]
+                .as_str()
+                .is_some_and(|s| s.to_lowercase().contains("preseason"))
+            {
+                d += TimeDelta::days(14);
+            }
+            date = Some(d);
 
             for i in 0..2 {
                 let group = match i {

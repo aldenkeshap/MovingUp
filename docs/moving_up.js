@@ -664,16 +664,6 @@ export class Teams {
 if (Symbol.dispose) Teams.prototype[Symbol.dispose] = Teams.prototype.free;
 
 /**
- * @param {number} left
- * @param {number} right
- * @returns {number}
- */
-export function add(left, right) {
-    const ret = wasm.add(left, right);
-    return ret >>> 0;
-}
-
-/**
  * @param {Sport} sport
  * @param {Ranking} ranked_teams
  * @param {number} timezone_offset
